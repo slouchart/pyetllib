@@ -1,14 +1,25 @@
 import functools
-import logging
+
 
 from ._config import log_levels
 
+
+import platform
+if platform.system().lower() == 'windows':
+    from ctypes import windll, c_int, byref
+    stdout_handle = windll.kernel32.GetStdHandle(c_int(-11))
+    mode = c_int(0)
+    windll.kernel32.GetConsoleMode(c_int(stdout_handle), byref(mode))
+    mode = c_int(mode.value | 4)
+    windll.kernel32.SetConsoleMode(c_int(stdout_handle), mode)
+
+
 """Mapping of method names to logging levels"""
 _dynamic_methods = {
-    'error': logging.ERROR,
-    'warning': logging.WARNING,
-    'info': logging.INFO,
-    'debug': logging.DEBUG,
+    'error': log_levels.ERROR,
+    'warning': log_levels.WARNING,
+    'info': log_levels.INFO,
+    'debug': log_levels.DEBUG,
     'ok': log_levels.OK,
     'fail': log_levels.FAIL,
     'prologue': log_levels.PROLOGUE,

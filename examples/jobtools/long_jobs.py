@@ -1,6 +1,6 @@
 import time
 
-from etllib.jobtools import Job
+from pyetllib.jobtools import Job
 
 
 def sleepy(idle):

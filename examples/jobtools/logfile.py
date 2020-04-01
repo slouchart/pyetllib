@@ -1,4 +1,4 @@
-from etllib.jobtools import Job
+from pyetllib.jobtools import Job
 from pathlib import Path
 import os
 import io

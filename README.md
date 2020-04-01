@@ -5,8 +5,9 @@ A toolbox to write ETL scripts the pythonic way
 ### `etllib`
 A suite of classes and utility functions to help create powerful data 
 jobs
-* a data collector
-* an execution context
+* data transformations as functions and decorators
+* smart execution context
+* job management and fancy logging
 * functions to load and render Jinja templates
 * functions to publish to streams
     

@@ -14,6 +14,7 @@ nav:
     - Configuring an ETL script: usrguide/config.md
     - Running an ETL script: usrguide/running.md
     - ETL Toolkit: usrguide/etltk.md
+    - Job Framework: usrguide/jobs.md
   - CLI Reference:
       - etlskel: cliref/etlskel.md
       - pyetl: cliref/pyetl.md

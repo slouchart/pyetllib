@@ -59,12 +59,11 @@ class Job:
         return self._stream
 
     @classmethod
-    def declare(cls, name=None, func=None, use_job=False,
+    def declare(cls, name=None, use_job=False,
                 color_output=True, use_stream=False, logfile=None):
 
-        job = Job(name=name, func=func, use_job=use_job,
-                  color_output=color_output, use_stream=use_stream,
-                  logfile=logfile)
+        job = Job(name=name, use_job=use_job, use_stream=use_stream,
+                  color_output=color_output, logfile=logfile)
 
         def decorator(f):
             assert job.func is None, "You're attempting to redefine the " \
@@ -165,7 +164,7 @@ class Job:
             args = (*args, self)
 
         if self._use_stream:
-            args = (*args, stream)
+            args = (*args, self._stream)
 
         outcome = False
         result = None
@@ -190,7 +189,7 @@ class Job:
     def __prologue__(self):
         self.started_at = (dt.datetime.now(), time.perf_counter())
         self.pid = os.getpid()
-        self.info(f"Started at {self.started_at[0].strftime('%H:%M:%S')}")
+        self.prologue(f"Started at {self.started_at[0].strftime('%H:%M:%S')}")
 
     def __epilogue__(self, success):
         self.ended_at = (dt.datetime.now(), time.perf_counter())
@@ -204,8 +203,8 @@ class Job:
         else:
             self.elapsed = round(self.elapsed, 2)
 
-        self.info(f"Finished at {self.ended_at[0].strftime('%H:%M:%S')}")
-        self.info(f"Total elapsed time: {self.elapsed}{unit}")
+        self.epilogue(f"Finished at {self.ended_at[0].strftime('%H:%M:%S')}")
+        self.epilogue(f"Total elapsed time: {self.elapsed}{unit}")
 
         if success:
             self.ok("Outcome is a success")

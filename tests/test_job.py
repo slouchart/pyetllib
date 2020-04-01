@@ -6,10 +6,10 @@ import os
 import functools
 import pathlib
 
-from src.pyetllib.etllib.jobtools import Job
-from src.pyetllib.etllib.jobtools import JobReport
-from src.pyetllib.etllib.jobtools import get_report
-import src.pyetllib.etllib.jobtools.exceptions as errors
+from src.pyetllib.jobtools import Job
+from src.pyetllib.jobtools import JobReport
+from src.pyetllib.jobtools import get_report
+import src.pyetllib.jobtools.exceptions as errors
 
 
 def redirect_stdout(func):
@@ -259,7 +259,7 @@ class TestColorOutput(TestCase):
                              stream=stdout)
         output = stdout.getvalue()
         self.assertIn(f'[no_color            ] {result.get_pid()} '
-                      f'INFO               Hello!',
+                      f'INFO                 Hello!',
                       output)
 
     @redirect_stdout

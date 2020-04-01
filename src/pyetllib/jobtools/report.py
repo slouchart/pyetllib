@@ -9,8 +9,8 @@ from ._internals import _init_dynamic_methods, _dispatch_dynamic_methods
 
 logging.addLevelName(log_levels.OK, 'OK')
 logging.addLevelName(log_levels.FAIL, 'FAIL')
-logging.addLevelName(log_levels.PROLOGUE, 'PROLOGUE')
-logging.addLevelName(log_levels.EPILOGUE, 'EPILOGUE')
+logging.addLevelName(log_levels.PROLOGUE, 'PROLOG')
+logging.addLevelName(log_levels.EPILOGUE, 'EPILOG')
 
 
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
@@ -40,12 +40,14 @@ def formatter_message(message, use_color=True):
 
 
 COLORS = {
-    logging.ERROR: RED,
-    logging.WARNING: YELLOW,
-    logging.INFO: BLUE,
-    logging.DEBUG: WHITE,
+    log_levels.ERROR: RED,
+    log_levels.WARNING: YELLOW,
+    log_levels.INFO: BLUE,
+    log_levels.DEBUG: WHITE,
     log_levels.OK: GREEN,
-    log_levels.FAIL: MAGENTA
+    log_levels.FAIL: MAGENTA,
+    log_levels.PROLOGUE: WHITE,
+    log_levels.EPILOGUE: WHITE,
 }
 
 
@@ -80,7 +82,7 @@ class JobReport(logging.Logger):
 
     FORMAT = "[$BOLD_ON%(name)-20s$BOLD_OFF] " \
              "%(process)d " \
-             "%(levelname)-18s " \
+             "%(levelname)-20s " \
              "%(message)s"
     COLOR_FORMAT = formatter_message(FORMAT, True)
     PLAIN_FORMAT = formatter_message(FORMAT, False)

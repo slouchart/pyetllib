@@ -98,7 +98,7 @@ def my_command_callback(context):
     arg = context.arg
 ```
 
-## function `log_timed_statistics`
+## decorator function `log_timed_statistics`
 `log_timed_statistics(logger_name=None)`
 : decorates a function to log the elapsed time of any synchronous 
 call to this function.

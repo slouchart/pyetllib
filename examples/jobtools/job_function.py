@@ -1,4 +1,4 @@
-from etllib.jobtools import Job
+from pyetllib.jobtools import Job
 
 
 def job(job_ref):
