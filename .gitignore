@@ -1,0 +1,11 @@
+.tox/
+.idea/
+*.egg-info/
+venv*/
+build/
+dist/
+html/
+__pycache__/
+*/__pycache__/
+.coverage
+site/

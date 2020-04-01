@@ -1,0 +1,54 @@
+# -*- coding: UTF-8 -*-
+
+
+from setuptools import setup, find_packages
+import io
+
+
+with io.open('README.md') as f:
+    readme = f.read()
+
+setup(
+    name="{{ project_name }}",
+    version="MANDATORY",
+    description='MANDATORY',
+    long_description=readme,
+    {% if not has_source_dir and no_test_package %}
+    packages=find_packages(),
+    {% elif not has_source_dir and not no_test_package %}
+    packages=find_packages(exclude=['tests']),
+    {% elif has_source_dir %}
+    packages=find_packages('src'),
+    {% endif %}
+    author='MANDATORY',
+    author_email='MANDATORY',
+    maintainer='MANDATORY',
+    maintainer_email='MANDATORY',
+    license='MIT',
+    install_requires=[
+        'Click',
+        'Jinja2',
+    ],
+    entry_points='''
+        [pyetl_plugins]
+        {{ entry_point }}={{ package }}:{{ function }}
+        ''',
+    {% if template_package %}
+    include_package_data=True,
+    package_data={
+        '{{ template_package }}': ['*.j2'],
+    },
+    {% endif %}
+    {% if has_source_dir %}
+    package_dir={'': 'src'},
+    {% endif %}
+    classifiers=[
+              'Development Status :: 3 - Alpha',
+              'Intended Audience :: Developers',
+              'Intended Audience :: System Administrators',
+              'License :: OSI Approved :: MIT License',
+              'Operating System :: POSIX :: Linux',
+              'Programming Language :: Python :: 3.6',
+              'Topic :: System :: Systems Administration',
+          ],
+)

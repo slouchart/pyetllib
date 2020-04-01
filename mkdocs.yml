@@ -1,0 +1,32 @@
+site_name: pyetllib ETL framework
+site_description: Documentation of the pyetllib ETL Framework
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - python
+    - bash
+nav:
+  - Home: index.md
+  - User Guide:
+    - Getting started: usrguide/getstarted.md
+    - Creating an ETL script: usrguide/creating.md
+    - Configuring an ETL script: usrguide/config.md
+    - Running an ETL script: usrguide/running.md
+    - ETL Toolkit: usrguide/etltk.md
+  - CLI Reference:
+      - etlskel: cliref/etlskel.md
+      - pyetl: cliref/pyetl.md
+  - API Reference:
+      - etllib.commands — command pattern implementation: apiref/commands.md
+      - etllib.config — configuration utilities: apiref/config.md
+      - etllib.context — smart execution context: apiref/context.md
+      - etllib.j2 — Jinja2 rendering: apiref/j2.md
+      - etllib.jobtools — job management and reports: apiref/jobs.md
+      - etllib.publish — data publication to IO streams: apiref/publish.md
+      - etllib.tools — data transformation functions: apiref/tools.md
+      - etllib.utils — miscellaneous utilities: apiref/utils.md
+  - Developer Guide:
+      - Contributing: devguide/contributing.md
+      - Tox interface: devguide/tox.md
+      - Documentation Guide: devguide/docauth.md

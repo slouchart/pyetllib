@@ -1,0 +1,15 @@
+[pyetl]
+
+[pyetl.itop]
+url = "https://itsm-dev.escolan.recia.fr"
+version = "1.3"
+username = "bot.test"
+password = "Mr9MS8WvJ6GdJZbe"
+
+[plugins]
+
+[plugins.pcaudit]
+
+[plugins.pcaudit.opsi]
+username = "foo"
+password = "bar"

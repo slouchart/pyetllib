@@ -1,0 +1,47 @@
+# tox (https://tox.readthedocs.io/) is a tool for running tests
+# in multiple virtualenvs. This configuration file will run the
+# test suite on all supported python versions. To use it, "pip install tox"
+# and then run "tox" from this directory.
+
+[tox]
+envlist = unit, func, style
+
+[testenv]
+description = Unit and functional testing with Python 3.6 and unittest2
+basepython = python3.6
+deps =
+    unittest2
+install_command = pip install {opts} {packages}
+
+[testenv:unit]
+description = Unit testing environment
+commands = unit2 discover [] -p 'test_*.py'
+
+[testenv:func]
+description = Functional testing environment
+commands = unit2 discover [] -p 'testf_*.py'
+
+[testenv:style]
+description = Style Guide Enforcement
+deps = flake8
+{% if has_source_dir %}
+commands = flake8 --ignore=E501,W391 {toxinidir}/src/{{ package_name }} {toxinidir}/tests
+{% else %}
+commands = flake8 --ignore=E501,W391 {toxinidir}/{{ package_name }} {toxinidir}/tests
+{% endif %}
+
+[testenv:cover]
+description = Coverage Testing
+deps = coverage
+       unittest2
+{% if has_source_dir %}
+commands = coverage run --source={toxinidir}/src/{{ package_name }} -m unittest2 discover -p 'test*.py'
+{% else %}
+commands = coverage run --source={toxinidir}/{{ package_name }} -m unittest2 discover -p 'test*.py'
+{% endif %}
+           coverage report -m
+
+[testenv:build]
+description = Build wheel distribution of the package
+deps = wheel
+commands = python -m setup bdist_wheel --universal --dist-dir={toxinidir}/dist
